@@ -9,12 +9,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class CustomerDto {
-    private Integer idCustomer;
-    private String name;
-    private String birthday;
-    private String phone;
-    private String email;
-    private String password;
-    private String address;
+public class GenderDto {
+    private int idGender;
+    private String genderName;
 }

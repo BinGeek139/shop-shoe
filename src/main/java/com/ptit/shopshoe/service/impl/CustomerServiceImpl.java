@@ -11,6 +11,7 @@ import com.ptit.shopshoe.entity.Role;
 import com.ptit.shopshoe.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     GenericMapper genericMapper;
 
-
+    @Transactional
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
         List<Customer> customers = customerDao.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());

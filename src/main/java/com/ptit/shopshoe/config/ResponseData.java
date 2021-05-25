@@ -11,8 +11,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ResponseData {
     String message;
-    Object data;
     String code;
+    Object data;
     public  static  ResponseData ofSuccess(Object data){
        return new ResponseData().setCode("0").setMessage("Thành công").setData(data);
     }
@@ -22,7 +22,10 @@ public class ResponseData {
     }
 
     public  static  ResponseData ofFailure(){
-        return new ResponseData().setCode("1").setMessage("Thành công");
+        return new ResponseData().setCode("1").setMessage("Thất bại");
+    }
+    public  static  ResponseData ofFailure(String message){
+        return new ResponseData().setCode("1").setMessage(message);
     }
 
 
