@@ -27,6 +27,7 @@ public class Product {
 
     @Id
     @Column(name = "id_product")
+    @GeneratedValue(strategy= GenerationType.AUTO)
     public Integer getIdProduct() {
         return idProduct;
     }

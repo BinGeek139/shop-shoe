@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.sql.Timestamp;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +20,7 @@ public class ProductRequest {
     private Integer sold;
     private Integer size;
     private String color;
-    Integer idCategory;
-    Integer idSupplier;
-    Integer idGender;
+    private Integer idCategory;
+    private Integer idSupplier;
+    private Integer idGender;
 }

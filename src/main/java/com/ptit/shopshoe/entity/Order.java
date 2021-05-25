@@ -4,21 +4,21 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "order_tb")
 public class Order {
-    private int idOrder;
+    private Integer idOrder;
     private BigDecimal amount;
     Product product;
-
-
+    Cart cart;
 
     @Id
     @Column(name = "id_order")
-    public int getIdOrder() {
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    public Integer getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(int idOrder) {
+    public void setIdOrder(Integer idOrder) {
         this.idOrder = idOrder;
     }
 
@@ -48,7 +48,7 @@ public class Order {
     }
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_product")
     public Product getProduct() {
         return product;
@@ -58,4 +58,13 @@ public class Order {
         this.product = product;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "id_cart")
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 }

@@ -29,7 +29,8 @@ public class CustomerServiceImpl implements CustomerService {
     public LoginResponse login(LoginRequest loginRequest) {
         List<Customer> customers = customerDao.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
         if(customers.size() >0){
-            return new LoginResponse().setName(customers.get(0).getName()).setRole(String.valueOf(customers.get(0).getRole().getId()));
+            return new LoginResponse().setName(customers.get(0).getName()).setRole(String.valueOf(customers.get(0).getRole().getId()))
+                    .setId(customers.get(0).getIdCustomer());
         }else {
             return null;
         }

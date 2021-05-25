@@ -27,6 +27,12 @@ public class ResponseData {
     public  static  ResponseData ofFailure(String message){
         return new ResponseData().setCode("1").setMessage(message);
     }
+    public  static  ResponseData ofOk(Object data){
+        return new ResponseData().setCode("0").setMessage("Thành công").setData(data);
+    }
+    public  static  ResponseData ofOk(String data){
+        return new ResponseData().setCode("0").setMessage(data);
+    }
 
 
 }

@@ -1,16 +1,18 @@
-package com.ptit.shopshoe.controller.response;
+package com.ptit.shopshoe.controller.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class LoginResponse {
-    Integer id;
-    String name;
-    String role;
+public class OrderRequest {
+    Integer customerId;
+    Integer productId;
+    BigDecimal amount;
 }

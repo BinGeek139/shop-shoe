@@ -22,52 +22,103 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("{id}")
-    public ResponseEntity<ResponseData> getById(@PathVariable("id") Integer id){
+    public ResponseEntity<ResponseData> getById(@PathVariable("id") Integer id) {
         ProductDto productDto = productService.getById(id);
-        ResponseData responseData=null;
-        if(productDto != null){
-            responseData=ResponseData.ofSuccess(productDto);
-        }else {
-            responseData=ResponseData.ofFailure("Id không tồn tại");
+        ResponseData responseData = null;
+        if (productDto != null) {
+            responseData = ResponseData.ofSuccess(productDto);
+        } else {
+            responseData = ResponseData.ofFailure("Id không tồn tại");
         }
         return ResponseEntity.ok(responseData);
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<ResponseData> delete(@PathVariable("id") Integer id){
-        Boolean delete= productService.delete(id);
-        ResponseData responseData=null;
-        if(delete){
-            responseData=ResponseData.ofOk();
-        }else {
-            responseData=ResponseData.ofFailure("Id không tồn tại");
+    public ResponseEntity<ResponseData> delete(@PathVariable("id") Integer id) {
+        Boolean delete = productService.delete(id);
+        ResponseData responseData = null;
+        if (delete) {
+            responseData = ResponseData.ofOk();
+        } else {
+            responseData = ResponseData.ofFailure("Id không tồn tại");
         }
         return ResponseEntity.ok(responseData);
     }
 
     @GetMapping()
-    public ResponseEntity<ResponseData> getAll(){
+    public ResponseEntity<ResponseData> getAll() {
         List<ProductDto> categoryDto = productService.getAll();
-        ResponseData responseData=null;
-        if(categoryDto != null){
-            responseData=ResponseData.ofSuccess(categoryDto);
-        }else {
-            responseData=ResponseData.ofFailure();
+        ResponseData responseData = null;
+        if (categoryDto != null) {
+            responseData = ResponseData.ofSuccess(categoryDto);
+        } else {
+            responseData = ResponseData.ofFailure();
         }
         return ResponseEntity.ok(responseData);
     }
 
-    @PostMapping
-    public ResponseEntity<ResponseData> create( ProductRequest productRequest,MultipartFile image){
-        ProductDto categoryDto = productService.create(productRequest,image);
-        ResponseData responseData=null;
-        if(categoryDto != null){
-            responseData=ResponseData.ofSuccess(categoryDto);
-        }else {
-            responseData=ResponseData.ofFailure();
+    @GetMapping("new-product/{numberProduct}")
+    public ResponseEntity<ResponseData> getNewProduct(@PathVariable("numberProduct") Integer numberProduct) {
+        List<ProductDto> categoryDto = productService.getNewProduct(numberProduct);
+        ResponseData responseData = null;
+        if (categoryDto != null) {
+            responseData = ResponseData.ofSuccess(categoryDto);
+        } else {
+            responseData = ResponseData.ofFailure();
         }
         return ResponseEntity.ok(responseData);
     }
+
+    @GetMapping("category")
+    public ResponseEntity<ResponseData> getNewProduct(Integer idCategory,Integer numberProduct) {
+        List<ProductDto> categoryDto = productService.getNewProductForCategory(idCategory,numberProduct);
+        ResponseData responseData = null;
+        if (categoryDto != null) {
+            responseData = ResponseData.ofSuccess(categoryDto);
+        } else {
+            responseData = ResponseData.ofFailure();
+        }
+        return ResponseEntity.ok(responseData);
+    }
+
+
+    @PostMapping
+    public ResponseEntity<ResponseData> create(ProductRequest productRequest, MultipartFile image) {
+        ProductDto categoryDto = productService.create(productRequest, image);
+        ResponseData responseData = null;
+        if (categoryDto != null) {
+            responseData = ResponseData.ofSuccess(categoryDto);
+        } else {
+            responseData = ResponseData.ofFailure();
+        }
+        return ResponseEntity.ok(responseData);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ResponseData> update(@PathVariable("id") Integer id, ProductRequest productRequest) {
+        ProductDto categoryDto = productService.update(id, productRequest);
+        ResponseData responseData = null;
+        if (categoryDto != null) {
+            responseData = ResponseData.ofSuccess(categoryDto);
+        } else {
+            responseData = ResponseData.ofFailure("Sản phẩm không tồn tại");
+        }
+        return ResponseEntity.ok(responseData);
+    }
+
+    @PutMapping("image/{idProduct}")
+    public ResponseEntity<ResponseData> updateImage(@PathVariable("idProduct") Integer id, MultipartFile image) {
+        String url = productService.updateImage(id, image);
+        ResponseData responseData = null;
+        if (url != null) {
+            responseData = ResponseData.ofSuccess(url);
+        } else {
+            responseData = ResponseData.ofFailure("Sản phẩm không tồn tại");
+        }
+        return ResponseEntity.ok(responseData);
+    }
+
+
 
 }

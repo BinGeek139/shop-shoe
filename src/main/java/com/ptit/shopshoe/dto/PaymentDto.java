@@ -1,4 +1,4 @@
-package com.ptit.shopshoe.controller.response;
+package com.ptit.shopshoe.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class LoginResponse {
-    Integer id;
-    String name;
-    String role;
+public class PaymentDto {
+    private Integer idPayment;
+    private String payment;
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @NoArgsConstructor
@@ -20,10 +21,8 @@ public class Customer {
     private String email;
     private String password;
     private String address;
-
-
     private Role role;
-
+    private List<Cart>  cart;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_role")
     public Role getRole() {
@@ -112,6 +111,12 @@ public class Customer {
         return idCustomer == customer.idCustomer && Objects.equals(name, customer.name) && Objects.equals(birthday, customer.birthday) && Objects.equals(phone, customer.phone) && Objects.equals(email, customer.email) && Objects.equals(password, customer.password) && Objects.equals(address, customer.address);
 
     }
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    public List<Cart> getCart() {
+        return cart;
+    }
 
-
+    public void setCart(List<Cart> cart) {
+        this.cart = cart;
+    }
 }
